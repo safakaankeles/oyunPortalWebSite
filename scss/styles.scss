@@ -1,0 +1,76 @@
+@import "setup/fonts.scss";
+@import "setup/colors";
+
+/**General Settings**/
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+body {
+  font-family: $secondaryFont;
+  color: $grayColor;
+  background-color: $lightColor;
+}
+.container {
+  max-width: 114rem;
+  margin: 0 auto;
+  width: 100%;
+}
+a {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: $primaryFont;
+  //   color: $lightColor;
+}
+ul {
+  list-style: none;
+}
+img {
+  width: 100%;
+}
+
+/** Top Header **/
+
+.topHeader {
+  border-bottom: 1px solid $primaryColor;
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .logo {
+      h1 {
+        font-size: 5rem;
+        font-family: $primaryFont;
+        color: $primaryColor;
+      }
+    }
+    .topSocialMenu {
+      display: flex;
+      li {
+        margin: 0 1rem;
+        padding: 1rem;
+        a {
+          font-size: 2rem;
+          transition: all 0.5s;
+        }
+        &:hover a {
+          color: $primaryColor;
+        }
+      }
+    }
+    .loginArea {
+      span {
+        display: none;
+      }
+    }
+  }
+}
