@@ -59,3 +59,62 @@
   transition: all 0.5s;
   color: $primaryColor;
 }
+
+/** REVIEWS **/
+
+.review {
+  padding: 5rem;
+  font-size: 1.3rem;
+  line-height: 1.8;
+  margin-left: 10rem;
+  // border-left: 1px solid $primaryColor;
+  // border-bottom: 1px solid $primaryColor;
+  // transform: skew(-28deg);
+  & > * {
+    // transform: skew(28deg);
+  }
+  &Tags {
+    font-size: 1.5rem;
+    color: $lightColor;
+    text-transform: uppercase;
+  }
+  &Text {
+    margin: 0px auto;
+  }
+  &User {
+    display: flex;
+    align-items: center;
+    img {
+      width: 8rem;
+      margin-right: 3rem;
+    }
+    &Detail {
+      font-family: $primaryFont;
+      margin-right: 3rem;
+
+      .reviewUserName {
+        color: $primaryColor;
+      }
+      .reviewUserDate {
+        color: $dateColor;
+      }
+    }
+    &Platform {
+      :not(:last-child) {
+        color: $primaryColor;
+      }
+      :last-child {
+        color: green;
+      }
+      .fab {
+        margin: 0 1rem;
+      }
+    }
+    &Rating {
+      margin-left: auto;
+      .checked {
+        color: $dateColor;
+      }
+    }
+  }
+}
