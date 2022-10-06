@@ -1,6 +1,9 @@
 @import "setup/fonts.scss";
-@import "setup/colors";
-
+@import "setup/colors.scss";
+@import "scss/components.scss";
+@import "utilities.scss";
+@import "mixins.scss";
+@import "animations.scss";
 /**General Settings**/
 
 *,
@@ -24,11 +27,39 @@ body {
   margin: 0 auto;
   width: 100%;
 }
+section {
+  padding: 8rem 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: $primaryFont;
+  color: $primaryColor;
+  font-weight: 300;
+  letter-spacing: 0.3rem;
+  text-transform: uppercase;
+}
+h1 {
+  font-size: 5rem;
+}
+h2 {
+  color: $lightColor;
+  font-size: 5rem;
+}
+h3 {
+  font-size: 2rem;
+}
+h4 {
+  font-size: 2rem;
+  color: $lightColor;
+}
 a {
   text-decoration: none;
   text-transform: uppercase;
   font-family: $primaryFont;
-  //   color: $lightColor;
+  color: $lightColor;
 }
 ul {
   list-style: none;
@@ -37,22 +68,17 @@ img {
   width: 100%;
 }
 
+.mainHeader {
+  background-color: $secondaryColor;
+}
+
 /** Top Header **/
 
 .topHeader {
   border-bottom: 1px solid $primaryColor;
   .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include flexDisplay(flex, center, space-between);
 
-    .logo {
-      h1 {
-        font-size: 5rem;
-        font-family: $primaryFont;
-        color: $primaryColor;
-      }
-    }
     .topSocialMenu {
       display: flex;
       li {
@@ -73,4 +99,269 @@ img {
       }
     }
   }
+}
+/** Nav Header **/
+
+.navHeader {
+  .navbar {
+    @include flexDisplay(flex, center, space-between);
+
+    .navbarList {
+      display: flex;
+      li {
+        line-height: 8rem;
+        position: relative;
+        .dropDown {
+          position: absolute;
+          background-color: lighten($primaryColor, 10%);
+          width: 150%;
+          left: 50%;
+          z-index: 10;
+          top: 12rem;
+          transition: all 0.5s;
+          opacity: 0;
+          visibility: hidden;
+
+          li {
+            line-height: 4rem;
+          }
+        }
+        &:hover {
+          background-color: $primaryColor;
+
+          & .dropDown {
+            opacity: 1;
+            top: 8rem;
+            visibility: visible;
+          }
+        }
+      }
+      a {
+        padding: 0 2rem;
+        font-size: 1.6rem;
+        letter-spacing: 2px;
+      }
+      i {
+        color: $lightColor;
+        font-size: 1.6rem;
+        margin-right: 1rem;
+      }
+    }
+    .searchArea {
+      input[type="search"],
+      button[type="submit"] {
+        border: none;
+        background-color: transparent;
+        color: $lightColor;
+      }
+      input[type="search"] {
+        border-bottom: 1px solid $primaryColor;
+        padding: 0.5rem;
+      }
+      button[type="submit"] {
+        margin-left: -5rem;
+      }
+    }
+  }
+}
+
+// MAIN SLİDER
+
+.mainSlider {
+  .singleSlide {
+    position: relative;
+
+    .slideOverlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(
+        ellipse at center,
+        rgba(0, 0, 0, 0.6) 0%,
+        rgba(0, 0, 0, 0.9) 100%
+      );
+      .slideContent {
+        position: absolute;
+        top: 70%;
+        width: 80%;
+        border-top: 2px solid $primaryColor;
+        border-bottom: 2px solid $primaryColor;
+        padding: 10rem 7rem;
+
+        background: linear-gradient(
+          to right,
+          rgba(0, 0, 0, 0.6),
+          rgba(202, 40, 8, 0.6)
+        );
+        font-size: 1.8rem;
+        animation: mainAni 3s ease-out;
+      }
+    }
+  }
+}
+
+/** OWL CUROUSEL **/
+
+.owl-theme {
+  .owl-dots {
+    position: absolute;
+    top: 5rem;
+    right: 6%;
+    z-index: 5;
+    display: flex;
+    .owl-dot {
+      display: inline-block;
+      width: 6rem;
+      height: 3.3rem;
+      text-align: center;
+      border-radius: 4rem;
+      background-color: transparent;
+      transition: all 0.5s;
+      &.active,
+      &:hover {
+        color: $primaryColor;
+        span {
+          background-color: transparent;
+        }
+      }
+      span {
+        font-size: 4rem;
+        font-family: $primaryFont;
+        background: transparent;
+      }
+    }
+  }
+}
+
+// LATEST NEWST
+
+.latestNews {
+  display: flex;
+  background-color: $primaryColor;
+  height: 8rem;
+  align-items: center;
+
+  &Title {
+    flex-basis: 25%;
+    text-align: right;
+    padding-right: 2rem;
+  }
+  &Content {
+    flex-basis: 75%;
+    background-color: $secondaryColor;
+    height: 100%;
+    .newsTicker {
+      @include flexDisplay(flex, center, space-between);
+      line-height: 8rem;
+      p {
+        columns: $lightColor;
+        font-size: 1.4rem;
+        color: $lightColor;
+        font-weight: 500;
+        span {
+          padding: 1rem;
+        }
+      }
+    }
+  }
+}
+// RECENT GAMES SECTİON
+.recentGames {
+  background-color: $lightColor;
+  &Content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-row-gap: 4rem;
+    grid-column-gap: 8rem;
+    grid-template-areas:
+      "item-1 item-1 item-1 item-2"
+      "item-3 item-4 item-5 item-6";
+    .recentGame {
+      width: 100%;
+      height: 100%;
+      background-color: $secondaryColor;
+      &Thumbnail {
+        position: relative;
+        overflow: hidden;
+        img {
+          width: 100%;
+          transition: all 0.5s;
+        }
+        &::after {
+          position: absolute;
+          top: 0;
+          left: 0;
+          content: "";
+          background-color: rgba($primaryColor, 0.6);
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          transition: all 0.5s;
+        }
+      }
+      &:hover,
+      &:focus {
+        .recentGameThumbnail {
+          &::after {
+            visibility: visible;
+            opacity: 1;
+          }
+          img {
+            transform: scale(1.1) rotate(5deg);
+          }
+          .rating {
+            opacity: 1;
+            transition: 0.5s;
+          }
+        }
+      }
+      &Content {
+        padding: 2rem;
+        .gameTitle {
+          margin-bottom: 2rem;
+          a {
+            transition: all 0.5s;
+
+            &:hover {
+              color: darken($lightColor, 40%);
+            }
+          }
+        }
+        .gameMeta {
+          @include flexDisplay(flex, center, space-between);
+          font-size: 1.5rem;
+          .gameDate {
+            color: $dateColor;
+            font-size: 1.5rem;
+          }
+        }
+        p {
+          font-size: 1.6rem;
+          line-height: 1.8;
+          color: $lightColor;
+        }
+      }
+    }
+  }
+}
+.recentGame1 {
+  grid-area: item-1;
+}
+.recentGame2 {
+  grid-area: item-2;
+}
+.recentGame3 {
+  grid-area: item-3;
+}
+.recentGame4 {
+  grid-area: item-4;
+}
+.recentGame5 {
+  grid-area: item-5;
+}
+.recentGame6 {
+  grid-area: item-6;
 }
